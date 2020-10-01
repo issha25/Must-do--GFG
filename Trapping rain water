@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+   
+
+// function to find the trapped water in between buildings
+// arr: input array
+// n: size of array
+int trappingWater(int a[], int n){
+    int left_max = 0, right_max = 0, result = 0;
+    
+    int low = 0, high = n-1;
+    
+    // using binary search we will update low and high
+    while(low <= high){
+        
+        if(a[low] < a[high]){
+            
+            // update max in left
+            if(a[low] > left_max){
+                left_max = a[low];
+            }
+            else
+            result += left_max-a[low];
+            
+            low++;
+        }
+        
+        // update max in right
+        else{
+            if(a[high] > right_max){
+                right_max = a[high];
+            }
+            else
+            result += right_max-a[high];
+            
+            high--;
+        }
+    }
+    
+    return result;
+    
+}
+
+// { Driver Code Starts.
+
+int main(){
+    
+    int t;
+    cin >> t;
+    
+    while(t--){
+        int n;
+        
+        cin >> n;
+        
+        int a[n];
+        
+        for(int i =0;i<n;i++){
+            cin >> a[i];            
+        }
+        
+        cout << trappingWater(a, n) << endl;
+        
+    }
+    
+    return 0;
+}  // } Driver Code Ends
